@@ -22,8 +22,9 @@ class Application(tk.Tk):
 
         # calling configure methods on the self instance of the root window
         self.columnconfigure(0, weight=1)
-        self.columnconfigure(1, weight=1)
+        self.columnconfigure(1, weight=3)
         self.rowconfigure(0, weight=1)
+        # self.rowconfigure(1, weight=3)
 
         # Create an 'InputForm' instance within the self Application
         frame = InputForm(self)
@@ -33,6 +34,11 @@ class Application(tk.Tk):
         frame2 = InputForm(self)
         frame2.grid(row=0, column=1, sticky="nsew", padx=5, pady=5)
 
+        # frame3 = InputForm(self)
+        # frame3.grid(row=1, column=0, sticky="nsew", padx=5, pady=5)
+
+        # frame4 = InputForm(self)
+        # frame4.grid(row=1, column=1, sticky="nsew", padx=5, pady=5)
 # Inherits ttk.Frame
 class InputForm(ttk.Frame):
     # the frame class takes a tk instance as the root, in this case it is the var parent
