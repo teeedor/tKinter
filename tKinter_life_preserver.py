@@ -70,6 +70,7 @@ text_list1.grid(row=1, column=0, columnspan=2, sticky="nsew")
 
 # --- frame 2 ---
 frame2 = tk.Frame(root)
+# add frame2 to the right of frame
 frame2.grid(row=0, column=1, sticky="nsew", padx=5, pady=5)
 
 frame2.columnconfigure(0, weight=1)
