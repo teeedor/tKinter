@@ -14,10 +14,9 @@ import os
 import csv
 
 # choose the csv files location
-# need to check os and change csv_folder path based on that
 csv_folder = "./csv_folder/"
+card_images_folder = "./card_images/"
 file_names = os.listdir(csv_folder)
-# print(file_names)
 
 def main():
     file_picker = csv_picker()
@@ -31,11 +30,13 @@ class csv_picker(tk.Tk):
         super().__init__()
         self.geometry("400x300")
         self.title("Choose a csv to analyze")
+        # Window Weights
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
 
         frame = ttk.Frame(self)
         # need these lines to get frame to resize
+        # frame weights
         frame.columnconfigure(0, weight=1) 
         frame.rowconfigure(0, weight=1) 
         # add frame to row 1 column 1 of root window
@@ -60,14 +61,15 @@ class csv_picker(tk.Tk):
             Card_stats_win(chosen_file)
         
 
-        
-
 # Card list from file on left, Images and stats on right
 class Card_stats_win(tk.Tk):
     def __init__(self, file):
         super().__init__()
-        self.columnconfigure(0, minsize=150)
+        self.columnconfigure(0, minsize=200)
         self.title("Card stats App")
+        # Window Weights
+        self.columnconfigure(0, weight=1)
+        self.rowconfigure(0, weight=1)
 
         cards = card_picker(self, file)
         cards.columnconfigure(0, weight=1) 
@@ -75,19 +77,29 @@ class Card_stats_win(tk.Tk):
         # add frame to row 1 column 1 of root window
         cards.grid(row=0, column=0, sticky="nsew", padx=5, pady=5)
 
-
+# Card_picker: list of cards that you can view
 class card_picker(tk.Frame):
     def __init__(self, parent, file):
         super().__init__(parent)
-
+        self.columnconfigure(0, weight=1)
+        # self.rowconfigure(0, weight=1)
+        # Elements of the Window
+        # Label
         self.label = tk.Label(self, text="Pick a card to analyze")
-        self.label.grid(row=0, column=0, sticky="nsew")
-
         # create a List box that will hold all the Data from the csv
         self.card_list = tk.Listbox(self) 
         self.card_list.columnconfigure(0, weight=1) 
-        self.card_list.rowconfigure(0, weight=1) 
-        self.card_list.grid(row=0, column=0, sticky="nsew")
+        # self.card_list.rowconfigure(1, weight=1) 
+        
+        # Create an image container to display the Image of the Card Chosen in card_list
+        self.card_image = tk.PhotoImage(file= card_images_folder + "image" + ".png")
+        # image_label = tk.Label(self, image=self.card_image)        
+
+        # Window Layout
+        self.label.grid(row=0, column=0, sticky="ew")
+        self.card_list.grid(row=1, column=0, sticky="nsew")
+        # image_label.pack()
+        # self.image_label.grid(row=0, column=1, sticky="nsew")
 
         # Reading csv file
         # populate card_list with all cards from the file
