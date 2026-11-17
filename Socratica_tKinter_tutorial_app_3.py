@@ -4,7 +4,7 @@ from tkinter import ttk
 def submit_landing_request():
     print(f"Landing Site Selected: {site_var.get()}")
     print(f"Visit Purpose: {purpose_var.get()}")
-    print(f"Experience: {experience_var.get('1.0', tk.END)}")
+    print(f"Experience: {experience_text.get('1.0', tk.END)}")
     print(f"Rover Protection: {rover_var.get()}")
     print(f"Mars Time Accepted: {time_var.get()}")
 
@@ -16,7 +16,7 @@ root.geometry("600x500")
 
 site_var = tk.StringVar()
 purpose_var = tk.IntVar()
-experience_var = tk.BooleanVar()
+rover_var = tk.BooleanVar()
 time_var = tk.BooleanVar()
 
 # Landing Sites
@@ -61,4 +61,26 @@ experience_text.grid(row=9, column=0, padx=5, pady=5)
 declaration_label = ttk.Label(root, text="Required Declarations", font=('Arial', 10, 'bold'))
 declaration_label.grid(row=10, column=0, padx=5, pady=10, sticky='w')
 
-# Need to keep working on this later
+rover_check = ttk.Checkbutton(
+    root,
+    text="I am not allergic to iron oxide",
+    variable=rover_var
+)
+rover_check.grid(row=13, column=0, padx=5, pady=2, sticky='w')
+
+time_check = ttk.Checkbutton(
+    root,
+    text="I accept that a Mars day is 24 Hours and 37 Minutes",
+    variable=time_var
+)
+time_check.grid(row=14, column=0, padx=5, pady=2, sticky='w')
+
+# Submit Button
+submit_button = ttk.Button(
+    root,
+    text="Submit Landing Request",
+    command=submit_landing_request
+)
+submit_button.grid(row=15, column=0, pady=20)
+
+root.mainloop()
